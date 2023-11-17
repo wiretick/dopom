@@ -1,0 +1,8 @@
+<div id="todo-item-{{todo.id}}">
+  <span
+    hx-put="/todos/{{ todo.id }}"
+    hx-target="#todo-item-{{todo.id}}"
+    hx-swap="outerHTML"
+    >- {% if todo.completed %}[V]{% endif %} {{ todo.description }}</span
+  >
+</div>
