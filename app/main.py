@@ -24,11 +24,24 @@ async def get_todos(request: Request):
 
 @app.post("/todos", response_class=HTMLResponse)
 async def create_todo(request: Request, description: Annotated[str, Form()]):
-    todos.append({"id": len(todos)+1, "description": description, "completed": False})
+    todos.append({"id": todos[-1]["id"]+1, "description": description, "completed": False})
     return templates.TemplateResponse("components/todo-list.html", {"request": request, "todos": todos})
 
 
 @app.put("/todos/{id}", response_class=HTMLResponse)
 async def update_todo_status(request: Request, id: int):
-    todos[id-1]["completed"] = not todos[id-1]["completed"]
-    return templates.TemplateResponse("components/todo-item.html", {"request": request, "todo": todos[id-1]})
+    todo = next(todo for todo in todos if todo["id"] == id)
+    todo["completed"] = not todo["completed"]
+    return templates.TemplateResponse("components/todo-item.html", {"request": request, "todo": todo})
+
+
+@app.delete("/todos/{id}", response_class=HTMLResponse)
+async def delete_todo_status(request: Request, id: int):
+    todos[:] = [todo for todo in todos if todo.get("id") != id]
+    return "" # Return empty string because we are deleting the todo from the list
+
+
+@app.delete("/todos", response_class=HTMLResponse)
+async def delete_all_todos(request: Request, selected_todo_items: list[int] = Form()):
+    todos[:] = [todo for todo in todos if todo.get("id") not in selected_todo_items]
+    return templates.TemplateResponse("components/todo-list.html", {"request": request, "todos": todos})

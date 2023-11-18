@@ -1,3 +1,16 @@
-<div id="todo-list">
-  {% for todo in todos %} {% include "components/todo-item.html" %} {% endfor %}
+<div class="todo-list">
+  <form>
+    {% for todo in todos %} {% include "components/todo-item.html" %} {% endfor
+    %}
+    <br />
+    <button
+      class="py-2 px-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded shadow focus:outline-none"
+      hx-delete="/todos"
+      hx-swap="outerHTML"
+      hx-target="closest .todo-list"
+      hx-confirm="Are you sure?"
+    >
+      Delete selected
+    </button>
+  </form>
 </div>

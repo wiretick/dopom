@@ -1,10 +1,5 @@
 <div>
-  <form
-    hx-post="/todos"
-    hx-target="#todo-list"
-    hx-indicator="#spinner"
-    hx-swap="outerHTML"
-  >
+  <form hx-post="/todos" hx-target=".todo-list" hx-swap="outerHTML">
     <input
       class="py-2 px-3 border border-gray-400 rounded"
       name="description"

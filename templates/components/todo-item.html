@@ -1,8 +1,18 @@
-<div id="todo-item-{{todo.id}}">
+<div class="todo-item">
+  <input type="checkbox" name="selected_todo_items" value="{{todo.id}}" />
   <span
     hx-put="/todos/{{ todo.id }}"
-    hx-target="#todo-item-{{todo.id}}"
+    hx-target="closest .todo-item"
     hx-swap="outerHTML"
     >- {% if todo.completed %}[V]{% endif %} {{ todo.description }}</span
+  >
+  <a
+    class="text-cyan-700 underline"
+    href="#"
+    hx-delete="/todos/{{ todo.id }}"
+    hx-target="closest .todo-item"
+    hx-swap="outerHTML swap:1s"
+    hx-confirm="Are you sure?"
+    >Delete</a
   >
 </div>
