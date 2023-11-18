@@ -36,12 +36,12 @@ async def update_todo_status(request: Request, id: int):
 
 
 @app.delete("/todos/{id}", response_class=HTMLResponse)
-async def delete_todo_status(request: Request, id: int):
+async def delete_todo(request: Request, id: int):
     todos[:] = [todo for todo in todos if todo.get("id") != id]
     return "" # Return empty string because we are deleting the todo from the list
 
 
 @app.delete("/todos", response_class=HTMLResponse)
-async def delete_all_todos(request: Request, selected_todo_items: list[int] = Form()):
+async def delete_selected_todos(request: Request, selected_todo_items: Annotated[list[int], Form()]):
     todos[:] = [todo for todo in todos if todo.get("id") not in selected_todo_items]
     return templates.TemplateResponse("components/todo-list.html", {"request": request, "todos": todos})
