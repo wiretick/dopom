@@ -12,4 +12,4 @@ Just another todo app. Made with FastAPI, SQLite and HTMX
 
 ## Usage
 
-Visit [](http://localhost:8000)
+Visit [localhost:8000](http://localhost:8000)
