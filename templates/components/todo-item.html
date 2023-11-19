@@ -1,10 +1,12 @@
 <div class="todo-item">
   <input type="checkbox" name="selected_todo_items" value="{{todo.id}}" />
   <span
+    class="{% if todo.completed %}line-through{% endif %}"
     hx-put="/todos/{{ todo.id }}"
     hx-target="closest .todo-item"
     hx-swap="outerHTML"
-    >- {% if todo.completed %}[V]{% endif %} {{ todo.description }}</span
+  >
+    {{ todo.description }}</span
   >
   <a
     class="text-cyan-700 underline"
