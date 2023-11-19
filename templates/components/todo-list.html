@@ -1,8 +1,18 @@
 <div class="todo-list">
   <form>
-    {% for todo in todos %} {% include "components/todo-item.html" %} {% endfor
-    %}
-    <!-- -->
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for todo in todos %} {% include "components/todo-item.html" %} {%
+        endfor %}
+      </tbody>
+    </table>
     <button
       class="py-1 px-2 bg-red-500 hover:bg-red-600 text-xs text-white font-semibold rounded shadow focus:outline-none"
       hx-delete="/todos"
